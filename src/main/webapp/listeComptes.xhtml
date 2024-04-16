@@ -6,11 +6,9 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./WEB-INF/template/template_defaut.xhtml">
-
     <ui:define name="top">
         Liste des comptes
     </ui:define>
-
     <ui:define name="content">
         <h:form>
             <p:dataTable value="#{listeComptes.allComptes}"
@@ -47,8 +45,6 @@
             </p:dataTable>
             <h:messages/>
         </h:form>
-
     </ui:define>
 
 </ui:composition>
-
