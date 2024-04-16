@@ -7,8 +7,11 @@ package com.nyavoko.tpbanquenyavoko.jsf;
 import com.nyavoko.tpbanquenyavoko.service.GestionnaireCompte;
 import com.nyavoko.tpbanquenyavoko.entity.CompteBancaire;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import java.io.Serializable;
+import java.util.Objects;
 import jdk.jshell.execution.Util;
 
 /**
@@ -17,7 +20,7 @@ import jdk.jshell.execution.Util;
  */
 @Named(value = "transfert")
 @ViewScoped
-public class Transfert implements Serializable {
+public class AjoutCompte implements Serializable {
 
     private Long idCompteSource;
     private Long idCompteDestinataire;
