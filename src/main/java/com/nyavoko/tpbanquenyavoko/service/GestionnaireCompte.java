@@ -34,7 +34,6 @@ import java.util.List;
             "driverClass=com.mysql.cj.jdbc.Driver"
         }
 )
-@ApplicationScoped
 public class GestionnaireCompte {
 
     @PersistenceContext(unitName = "banquePU")
@@ -65,12 +64,29 @@ public class GestionnaireCompte {
     }
 
     @Transactional
-    public void transfertArgent(Long source, Long destinataire, int montant) {
-        CompteBancaire compteSource = findById(source);
-        CompteBancaire compteDestinataire = findById(destinataire);
-        compteDestinataire.deposer(montant);
-        compteSource.retirer(montant);
-        update(compteSource);
-        update(compteDestinataire);
+    public void transfertArgent(CompteBancaire source, CompteBancaire destinataire, int montant) {
+        destinataire.deposer(montant);
+        source.retirer(montant);
+        update(source);
+        update(destinataire);
     }
+
+    @Transactional
+    public void deposer(CompteBancaire c, int montant) {
+        c.deposer(montant);
+        update(c);
+    }
+
+    @Transactional
+    public void retirer(CompteBancaire c, int montant) {
+        c.retirer(montant);
+        update(c);
+    }
+
+    @Transactional
+    public void supprimerCompte(CompteBancaire compte) {
+        CompteBancaire c = em.merge(compte);
+        em.remove(c);
+    }
+
 }

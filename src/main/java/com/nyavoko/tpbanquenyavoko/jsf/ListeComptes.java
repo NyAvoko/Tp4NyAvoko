@@ -8,6 +8,7 @@ import com.nyavoko.tpbanquenyavoko.entity.CompteBancaire;
 import com.nyavoko.tpbanquenyavoko.service.GestionnaireCompte;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.Dependent;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
  * @author Ny Avoko
  */
 @Named(value = "listeComptes")
-@Dependent
+@ViewScoped
 public class ListeComptes implements Serializable {
 
     private List<CompteBancaire> allComptes;
@@ -31,9 +32,24 @@ public class ListeComptes implements Serializable {
     public ListeComptes() {
     }
 
+    /**
+     * @PostConstruct est une annotation utilisée pour définir une méthode qui
+     * doit être exécutée après que l'injection de dépendance ait eu lieu et que
+     * toutes les initialisations requises aient été effectuées.
+     */
+//    @PostConstruct
+//    public void init() {
+//        this.allComptes = gestionnaireCompte.getAllComptes();
+//    }
     public List<CompteBancaire> getAllComptes() {
         allComptes = gestionnaireCompte.getAllComptes();
         return allComptes;
+    }
+
+    public String supprimerCompte(CompteBancaire compteBancaire) {
+        gestionnaireCompte.supprimerCompte(compteBancaire);
+        Util.addFlashInfoMessage("Compte de " + compteBancaire.getNom() + " supprimé");
+        return "listeComptes?faces-redirect=true";
     }
 
 }
