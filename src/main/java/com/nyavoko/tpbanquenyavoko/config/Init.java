@@ -12,24 +12,24 @@ import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;
 import com.nyavoko.tpbanquenyavoko.service.GestionnaireCompte;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.transaction.Transactional;
 
 /**
  *
  * @author Ny Avoko
  */
-@RequestScoped
 public class Init {
 
     @Inject
     private GestionnaireCompte gestionnaireCompte;
 
-    public void init(
-            @Observes
-            @Initialized(ApplicationScoped.class) ServletContext context) {
-        gestionnaireCompte.creerCompte(new CompteBancaire("John Lennon", 150000));
-        gestionnaireCompte.creerCompte(new CompteBancaire("Paul McCartney", 950000 ));
-        gestionnaireCompte.creerCompte(new CompteBancaire("Ringo Starr", 20000 ));
-        gestionnaireCompte.creerCompte(new CompteBancaire("Georges Harrisson", 100000));
-
+    @Transactional
+    public void init(@Observes @Initialized(ApplicationScoped.class) ServletContext context) {
+        if (gestionnaireCompte.nbComptes() == 0) {
+            gestionnaireCompte.creerCompte(new CompteBancaire("John Lennon", 150000)); // Ajoutez ici les paramètres pour créer un compte
+            gestionnaireCompte.creerCompte(new CompteBancaire("Paul McCartney", 950000)); // Ajoutez ici les paramètres pour créer un compte
+            gestionnaireCompte.creerCompte(new CompteBancaire("Ringo Starr", 20000)); // Ajoutez ici les paramètres pour créer un compte
+            gestionnaireCompte.creerCompte(new CompteBancaire("Georges Harrisson", 100000)); // Ajoutez ici les paramètres pour créer un compte
+        }
     }
 }
