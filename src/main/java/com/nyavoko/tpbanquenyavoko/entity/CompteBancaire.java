@@ -4,10 +4,13 @@
  */
 package com.nyavoko.tpbanquenyavoko.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
@@ -15,14 +18,40 @@ import java.io.Serializable;
  * @author Avoko
  */
 @Entity
+@Table(name = "COMPTEBANCAIRE")
+@XmlRootElement
 public class CompteBancaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nom;
-    private int solde;
+
+    @Column(name = "NOM")
+    String nom;
+
+    @Column(name = "SOLDE")
+    int solde;
+
+    public CompteBancaire() {
+    }
+
+    public CompteBancaire(String nom, int solde) {
+        this.nom = nom;
+        this.solde = solde;
+    }
+
+    public void deposer(int montant) {
+        solde += montant;
+    }
+
+    public void retirer(int montant) {
+        if (montant < solde) {
+            solde -= montant;
+        } else {
+            solde = 0;
+        }
+    }
 
     /**
      * Get the value of solde
@@ -89,20 +118,4 @@ public class CompteBancaire implements Serializable {
         return "com.nyavoko.tpbanquenyavoko.entity.CompteBancaire[ id=" + id + " ]";
     }
 
-    public CompteBancaire(String nom, int solde) {
-        this.nom = nom;
-        this.solde = solde;
-    }
-
-    public void deposer(int montant) {
-        solde += montant;
-    }
-
-    public void retirer(int montant) {
-        if (montant < solde) {
-            solde -= montant;
-        } else {
-            solde = 0;
-        }
-    }
 }
