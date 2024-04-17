@@ -11,7 +11,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.Objects;
-import jdk.jshell.execution.Util;
+
 
 /**
  *
@@ -71,13 +71,6 @@ public class Transfert implements Serializable {
             // si l'id du formulaire est "form" et l'id du champ de saisie de l'id de la source est "source"
             // dans la page JSF qui lance le transfert.
             erreur = true;
-        } else if (compteSource != null) {
-            if (compteSource.getSolde() < montant) { // à compléter pour le cas où le solde du compte source est insuffisant...
-                System.out.print("compteSource NULL");
-
-                Util.messageErreur("le solde du compte source est insuffisant!", "le solde du compte source est insuffisant!", "form:montant");
-                erreur = true;
-            }
         }
         if (compteDestinataire == null) {
             Util.messageErreur("Compte inexistant: " + idCompteDestinataire, "Compte inexistant: " + idCompteDestinataire, "form:destinataire");

@@ -19,7 +19,7 @@ import java.io.Serializable;
 public class Modifier implements Serializable {
 
     @Inject
-    GestionnaireCompte gestionnaireCompte;
+    transient GestionnaireCompte gestionnaireCompte;
 
     private Long id;
     private CompteBancaire compteBancaire;
@@ -55,7 +55,7 @@ public class Modifier implements Serializable {
     }
 
     public String update() {
-        CompteBancaire compteBancaire = gestionnaireCompte.update(this.compteBancaire);
+        compteBancaire = gestionnaireCompte.update(this.compteBancaire);
         Util.addFlashInfoMessage("Le changement du nom " + nom + " en " + compteBancaire.getNom() + " a été effectué avec succès.");
         return "listeComptes?faces-redirect=true";
     }

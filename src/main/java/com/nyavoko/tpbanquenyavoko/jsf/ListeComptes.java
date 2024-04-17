@@ -7,7 +7,6 @@ package com.nyavoko.tpbanquenyavoko.jsf;
 import com.nyavoko.tpbanquenyavoko.entity.CompteBancaire;
 import com.nyavoko.tpbanquenyavoko.service.GestionnaireCompte;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.Dependent;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import java.io.Serializable;
