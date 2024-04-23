@@ -86,5 +86,4 @@ public class GestionnaireCompte {
         CompteBancaire c = em.merge(compte);
         em.remove(c);
     }
-
 }

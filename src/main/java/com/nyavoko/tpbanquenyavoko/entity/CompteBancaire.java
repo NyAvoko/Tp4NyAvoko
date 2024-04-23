@@ -25,11 +25,14 @@ import java.util.List;
 @Entity
 @Table(name = "COMPTEBANCAIRE")
 @XmlRootElement
+//@NamedQueries({
+//    @NamedQuery(name = "CompteBancaire.findAll", query = "SELECT c FROM COMPTEBANCAIRE c")
+//})
 public class CompteBancaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "NOM")
@@ -68,20 +71,24 @@ public class CompteBancaire implements Serializable {
         this.operations.add(new OperationBancaire("Crédit", montant));
     }
 
-    public int getSolde() {
-        return solde;
-    }
-
-    public void setSolde(int solde) {
-        this.solde = solde;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public String getNom() {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public int getSolde() {
+        return solde;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setSolde(int solde) {
+        this.solde = solde;
     }
 
     public Long getId() {
