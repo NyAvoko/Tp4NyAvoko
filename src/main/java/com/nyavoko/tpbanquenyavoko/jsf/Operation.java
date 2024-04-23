@@ -1,3 +1,5 @@
+package com.nyavoko.tpbanquenyavoko.jsf;
+
 
 import com.nyavoko.tpbanquenyavoko.entity.CompteBancaire;
 import com.nyavoko.tpbanquenyavoko.jsf.Util;

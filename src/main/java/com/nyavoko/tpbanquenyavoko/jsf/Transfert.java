@@ -67,16 +67,17 @@ public class Transfert implements Serializable {
         if (compteSource == null) {
             System.out.print("compteSource NULL");
             Util.messageErreur("Compte inexistant: " + idCompteSource, "Compte inexistant : " + idCompteSource, "form:source");
-            // Message d'erreur associé au composant source ; form:source est l'id client
-            // si l'id du formulaire est "form" et l'id du champ de saisie de l'id de la source est "source"
-            // dans la page JSF qui lance le transfert.
             erreur = true;
+        } else if (compteSource != null) {
+            if (compteSource.getSolde() < montant) { // à compléter pour le cas où le solde du compte source est insuffisant...
+                System.out.print("compteSource NULL");
+
+                Util.messageErreur("le solde du compte source est insuffisant!", "le solde du compte source est insuffisant!", "form:montant");
+                erreur = true;
+            }
         }
         if (compteDestinataire == null) {
             Util.messageErreur("Compte inexistant: " + idCompteDestinataire, "Compte inexistant: " + idCompteDestinataire, "form:destinataire");
-            // Message d'erreur associé au composant source ; form:source est l'id client
-            // si l'id du formulaire est "form" et l'id du champ de saisie de l'id de la source est "source"
-            // dans la page JSF qui lance le transfert.
             erreur = true;
         }
         if (Objects.equals(idCompteSource, idCompteDestinataire)) {
@@ -84,7 +85,7 @@ public class Transfert implements Serializable {
             Util.messageErreur("Les comptes source et destination doivent être différents", "Les comptes source et destination doivent être différents", "form:destinataire");
             erreur = true;
         }
-        if (erreur) { // en cas d'erreur, rester sur la même page
+        if (erreur) {
             return null;
         }
 
